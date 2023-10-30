@@ -25,6 +25,14 @@
               inherit inputs pkgs;
               modules = [
                 {
+                  services = {
+                    postgres = {
+                      enable = true;
+                      package = pkgs.postgresql_15;
+                      initialDatabases = [{ name = "cpthook-development"; }];
+                    };
+                  };
+
                   # https://devenv.sh/reference/options/
                   packages = [ pkgs.hello ];
                   languages.go = {
